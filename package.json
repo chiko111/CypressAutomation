@@ -1,0 +1,21 @@
+{
+  "name": "cypressautomation",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "cypress": "^12.4.0",
+    "cypress-localstorage-commands": "^2.2.2",
+    "cypress-xpath": "^2.0.1"
+  },
+  "dependencies": {
+    "@stomp/stompjs": "^7.0.0",
+    "websocket": "^1.0.34",
+    "ws": "^8.12.0"
+  }
+}
