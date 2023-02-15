@@ -1,0 +1,9 @@
+{
+  "iframeServer": "https://integrations01-webiframe.betgames.tv/",
+  "betGamesServer": "https://integrations01.betgames.tv/",
+  "betGamesPartnerCode": "efbet_com_2",
+  "playerToken": "17a70338-32f0-41e6-8bcf-c797182b4d98",
+  "timezoneUtc": 2,
+  "oddsFormat": "decimal",
+  "defaultGameId": "16"
+}

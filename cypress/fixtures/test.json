@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<root>
+  <method>request_new_token</method>
+  <token>2643620b-5d5b-4e4a-b80c-d59aaced13b8</token>
+  <success>1</success>
+  <error_code>0</error_code>
+  <error_text/>
+  <time>1673335858</time>
+  <signature>e38e425690fd4a393a2f8a100dc7332c</signature>
+  <params>
+    <new_token>85d3e166-4e30-4e2f-86e2-b998f6933d41</new_token>
+  </params>
+</root>
