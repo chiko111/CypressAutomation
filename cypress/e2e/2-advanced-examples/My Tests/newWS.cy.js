@@ -5,12 +5,12 @@ before(() => {
   
 });
 it('test', () => {
-  const socket = new WebSocket("ws://localhost:8080/your-socket-endpoint");
+  const socket = new WebSocket("wss://apigw-staging.efbet.tech/ws-gateway");
   socket.addEventListener("open", () => {
     socket.send(
       JSON.stringify({
-        headers: {
-          "x-authorization": "your-token"
+        connect: {
+          "X-autorization": env.tokenplayer
         }
       })
     );
@@ -20,7 +20,7 @@ it('test', () => {
     socket.addEventListener("message", event => {
       const message = JSON.parse(event.data);
       if (message.topic === "your-topic") {
-        // process message from topic here
+        cy.log(event.data)// process message from topic here
       }
     });
   });
