@@ -9,7 +9,7 @@
   "author": "",
   "license": "ISC",
   "devDependencies": {
-    "cypress": "^12.4.0",
+    "cypress": "^12.5.1",
     "cypress-localstorage-commands": "^2.2.2",
     "cypress-xpath": "^2.0.1"
   },
