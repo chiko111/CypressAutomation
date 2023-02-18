@@ -25,7 +25,13 @@
 // Cypress.Commands.overwrite('visit', (originalFn, url, options) => { ... })
 
 
-
+Cypress.Commands.add('loginplayer', (user, password) => {
+  cy.visit('https://staging.efbet.tech?login=true')
+      cy.get('#btn-cookie-pop-up').click()
+      cy.get('#username-login-modal').type(user)
+      cy.get('#password-login-modal').type(password)
+      cy.get('#btn-login-widget-login').click()
+})
 
 
 Cypress.Commands.add('tokenplayer', (user, password) => {
