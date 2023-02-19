@@ -21,18 +21,17 @@ describe('Websocket test', () => {
 
     // Define the headers to send in the initial message
     const headers = {
-      'x-authorization': env.tokenplayer,
+      'heart-beat':'4000,10000',
       'accept-version': '1.0, 1.1, 1.2',
-      'heart-beat':'4000,10000'
+      'x-authorization': env.tokenplayer
     };
 
     // Define the special symbol to send in the initial message
-        var specialSymbol = "\n";
+        var specialSymbol = "\x00";
     
         
         // Create a new WebSocket instance and connect to the endpoint
-        const WebSocketClient = new WebSocket(wsEndpoint);
-       
+        const WebSocketClient = new WebSocket(wsEndpoint)
 
         // Listen for the 'open' event to know when the connection is established
         WebSocketClient.addEventListener('open', () => {
@@ -40,16 +39,23 @@ describe('Websocket test', () => {
           
           const initialMessage = 
 `CONNECT
-X-Authorization:Bearer ${env.tokenplayer}
 accept-version:1.0,1.1,1.2
 heart-beat:4000,10000
-           
+X-Authorization:Bearer ${env.tokenplayer}
+
 ${specialSymbol}`
 
-          WebSocketClient.send(initialMessage);
+          WebSocketClient.send(initialMessage)
+        
+          
 
           // Subscribe to the specified topic
-          const subscribeMessage = `SUBSCRIBE id:sub-0 destination:/topic/private/playerId.19787 ${specialSymbol}`
+          const subscribeMessage = 
+`SUBSCRIBE
+id:sub-0
+destination:/topic/private/playerId.19787 
+
+${specialSymbol}`
           WebSocketClient.send(subscribeMessage);
         });
 
@@ -62,11 +68,7 @@ ${specialSymbol}`
           }
         });
       });
-    });
+    
 
-
-//JSON.stringify({
- // headers: headers,
-  //specialSymbol: specialSymbol
-//});
-
+    })
+  

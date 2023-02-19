@@ -26,6 +26,7 @@
 
 
 Cypress.Commands.add('loginplayer', (user, password) => {
+  cy.viewport(1920, 1080)
   cy.visit('https://staging.efbet.tech?login=true')
       cy.get('#btn-cookie-pop-up').click()
       cy.get('#username-login-modal').type(user)
