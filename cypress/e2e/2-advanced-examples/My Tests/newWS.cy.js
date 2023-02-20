@@ -5,12 +5,13 @@ var WebSocketClient = require('websocket').client;
 describe('Websocket test', () => {
   before(() => {
     cy.tokenplayer();
+    cy.tokenadmin()
+   cy.withdraw("50")
   });
 
   it('test', () => {
    cy.loginplayer('testchiko', '123456')
-   cy.tokenadmin()
-   cy.withdraw("50")
+   
 
     //const WebSocket = require('ws');
     
@@ -57,6 +58,7 @@ ${specialSymbol}`
 WebSocketClient.addEventListener('message', (event) => {
   const message = event.data;
   if (message.startsWith('CONNECTED')) {
+    
     // Subscribe to the specified topic
     const subscribeMessage = 
 `SUBSCRIBE
@@ -74,7 +76,7 @@ ${specialSymbol}`
 
 
 
-
+  
   // Listen for incoming messages on the subscribed topic
   WebSocketClient.addEventListener('message', (event) => {
     const message = (event.data);
