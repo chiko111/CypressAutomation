@@ -9,6 +9,9 @@ describe('Websocket test', () => {
 
   it('test', () => {
    cy.loginplayer('testchiko', '123456')
+   cy.tokenadmin()
+   cy.withdraw("50")
+
     //const WebSocket = require('ws');
     
     // Import the 'ws' library to handle WebSocket connections
@@ -47,28 +50,42 @@ ${specialSymbol}`
 
           WebSocketClient.send(initialMessage)
         
-          
 
-          // Subscribe to the specified topic
-          const subscribeMessage = 
+              
+
+// Add event listener for the "connected" message
+WebSocketClient.addEventListener('message', (event) => {
+  const message = event.data;
+  if (message.startsWith('CONNECTED')) {
+    // Subscribe to the specified topic
+    const subscribeMessage = 
 `SUBSCRIBE
 id:sub-0
 destination:/topic/private/playerId.19787 
 
 ${specialSymbol}`
-          WebSocketClient.send(subscribeMessage);
-        });
+    WebSocketClient.send(subscribeMessage);
+  }
+});
 
-        // Listen for incoming messages on the subscribed topic
-          WebSocketClient.addEventListener('message', (event) => {
-          const message = (event.data);
-          if (message.command === 'MESSAGE' && message.headers.destination === `/topic/${topic}`) {
-            // Do something with the message
-            cy.log('Received message:', message.body);
-          }
-        });
-      });
-    
+// Open the WebSocket connection
 
-    })
   
+
+
+
+
+  // Listen for incoming messages on the subscribed topic
+  WebSocketClient.addEventListener('message', (event) => {
+    const message = (event.data);
+
+    if (message.command === 'MESSAGE' && message.headers.destination === '/topic/private/playerId.19787') {
+      // Do something with the message
+      cy.log('Received message:', message.body);
+    }
+  });
+});
+  })
+  
+})
+

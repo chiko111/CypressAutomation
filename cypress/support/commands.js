@@ -25,6 +25,9 @@
 // Cypress.Commands.overwrite('visit', (originalFn, url, options) => { ... })
 
 
+
+
+
 Cypress.Commands.add('loginplayer', (user, password) => {
   cy.viewport(1920, 1080)
   cy.visit('https://staging.efbet.tech?login=true')
@@ -228,5 +231,21 @@ Cypress.Commands.add('cashoutcalculation', (oddint) => {
       CO = ((Number(response.body[oddint_p]['c'])*(Number(env.odd_prematch)/Number(env.Codds_prematch)))+Number(response.body[oddint_p]['d']))*Number(response.body[oddint_p]['q'])
       cy.log(CO)
     })
+  })
+})
+
+Cypress.Commands.add('withdraw', (amount) => {
+  const env = Cypress.env() 
+  cy.request({
+    method: 'POST',
+    url: 'https://apigw-staging.efbet.tech/api/v1/accounting/admin/transactions/manual-transaction',
+    auth: {bearer: env.tokenadmin}
+    ,
+    body: 
+      {"amount":"50","paymentProvider":"BANK_WIRE_TRANSFER","playerId":19787,"reason":"","transactionType":"WITHDRAW"}
+    
+  }).then((resp) => {
+    cy.wait(300)
+    
   })
 })
