@@ -17,14 +17,20 @@ describe("Cash Out", () => {
   let stakeIN = 100;
   beforeEach(() => {
     cy.viewport(1920, 1080);
-    cy.tokenplayer();
+    cy.tokenplayer('testchiko', '123456');
     cy.tokenadmin(); // Set the session as a header for subsequent requests
   });
   it("Get Sport Events", () => {
     const env = Cypress.env();
 
     cy.request({
+      method: "POST",
       url: "https://apigw-staging.efbet.tech/api/v1/sport-event/public/sport-event/program?lang=bg&range=TOMORROW&streamingOnly=false",
+      body: [
+        120
+      ]
+
+      
     }).then((response) => {
       env.odd_prematch = response.body[0]["sportEvents"][0]["mainMarket"]["outcomes"][0]["odds"];
       const odd_id = response.body[0]["sportEvents"][0]["mainMarket"]["outcomes"][0]["id"];

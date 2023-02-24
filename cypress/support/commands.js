@@ -44,11 +44,12 @@ Cypress.Commands.add('tokenplayer', (user, password) => {
     method: 'POST',
     url: env.auth_url,
     body: {
-      "username": env.auth_username,
-      "password": env.auth_password
+      "username": user,
+      "password": password
     }
   }).then((resp) => {
     env.tokenplayer = resp.body.access_token;
+    env.playerId = resp.body.playerId
     Cypress.env(env)
   })
 })
