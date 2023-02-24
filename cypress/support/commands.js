@@ -250,3 +250,35 @@ Cypress.Commands.add('withdraw', (amount) => {
     
   })
 })
+
+
+Cypress.Commands.add('placebetprematch', (odds, stakeIN) => {
+const env = Cypress.env();
+cy.tokenplayer("testchiko1", "123456")
+    cy.request({
+      method: "POST",
+      url: "https://apigw-staging.efbet.tech/api/v1/sport-event/public/sport-event/program?lang=bg&range=TOMORROW&streamingOnly=false",
+      body: [
+        120
+      ]
+
+      
+    }).then((response) => {
+      env.odd_prematch = response.body[0]["sportEvents"][0]["mainMarket"]["outcomes"][odds]["odds"];
+      const odd_id = response.body[0]["sportEvents"][0]["mainMarket"]["outcomes"][odds]["id"];
+      Cypress.env(env)
+
+      cy.request({
+        method: "POST",
+        url: "https://apigw-staging.efbet.tech/api/v1/betslip/private/placebet",
+        auth: { bearer: env.tokenplayer },
+        body: {
+          bonusBet: false,
+          channel: "MOBILE",
+          outcomes: [{ banker: false, id: odd_id, odds: env.odd_prematch, stake: stakeIN }],
+        },
+      }).then((response) => {
+        cy.log("bet succeed" + stakeIN);
+    })
+  })
+    })
