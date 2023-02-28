@@ -63,7 +63,21 @@ describe('testing token', () => {
 
     })
   })
-  it("Sport check bg translation", () => {
+  it("Sport-event translate bg", () => {
+    const env = Cypress.env();
+    const response_req = 
+    cy.request({
+      method: 'PUT',
+      url: 'https://apigw-staging.efbet.tech/api/v1/sport-event/admin/translate/sport-event',
+      auth: {bearer: env.tokenadmin},
+      body:[{"id":852783,"name":"PFC Levski Sofia - PFC Ludogorets 1945 Razgrad","translatedNames":{"en":"PFC Levski Sofia - PFC Ludogorets 1945 Razgrad","bg":"ПФК Левски София - ПФК Лудогорец 1945 Разград"}}]
+    }).then((response) => { 
+    
+    
+
+    })
+  })
+  it("Sport, category, tournament, sport event check bg translation", () => {
     const env = Cypress.env();
     cy.wait(200000)
     cy.request({
