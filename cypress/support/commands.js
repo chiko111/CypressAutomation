@@ -224,13 +224,14 @@ Cypress.Commands.add('cashoutcalculation', (oddint) => {
       Cypress.env(env)
 
   cy.request({
+    
     url: 'https://apigw-staging.efbet.tech/api/v1/betslip/admin/cashout/prematch/odds-range',
     auth: {bearer: env.tokenadmin},
     }).then((response) => { 
     
 
-      CO = ((Number(response.body[oddint_p]['c'])*(Number(env.odd_prematch)/Number(env.Codds_prematch)))+Number(response.body[oddint_p]['d']))*Number(response.body[oddint_p]['q'])
-      cy.log(CO)
+      const CO = ((Number(response.body[oddint_p]['c'])*(Number(env.odd_prematch)/Number(env.Codds_prematch)))+Number(response.body[oddint_p]['d']))*Number(response.body[oddint_p]['q'])
+      cy.log(CO*100)
     })
   })
 })

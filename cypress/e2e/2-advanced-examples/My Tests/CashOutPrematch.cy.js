@@ -98,40 +98,42 @@ describe("Cash Out", () => {
                 ],
               },
             }).then((response) => {
-              if (odd < 2) {
+              cy.log(env.Codds_prematch)
+              if (env.Codds_prematch < 2) {
+                cy.cashoutcalculation_premach(0);
               } else {
-                if (odd > 2 || odd < 3) {
-                  cy.cashoutcalculation_premach(0);
+                if (env.Codds_prematch > 2 || odd < 3) {
+                  cy.cashoutcalculation_premach(1);
                 } else {
-                  if (odd > 3 || odd < 4) {
-                    cy.cashoutcalculation_premach(1);
+                  if (env.Codds_prematch > 3 || env.Codds_prematch < 4) {
+                    cy.cashoutcalculation_premach(2);
                   } else {
-                    if (odd > 4 || odd < 5) {
-                      cy.cashoutcalculation_premach(2);
+                    if (env.Codds_prematch > 4 || env.Codds_prematch < 5) {
+                      cy.cashoutcalculation_premach(3);
                     } else {
-                      if (odd > 5 || odd < 6) {
-                        cy.cashoutcalculation_premach(3);
+                      if (env.Codds_prematch > 5 || env.Codds_prematch < 6) {
+                        cy.cashoutcalculation_premach(4);
                       } else {
-                        if (odd > 6 || odd < 7) {
-                          cy.cashoutcalculation_premach(4);
+                        if (env.Codds_prematch > 6 || env.Codds_prematch < 7) {
+                          cy.cashoutcalculation_premach(5);
                         } else {
-                          if (odd > 7 || odd < 8) {
-                            cy.cashoutcalculation_premach(5);
+                          if (env.Codds_prematch > 7 || env.Codds_prematch < 8) {
+                            cy.cashoutcalculation_premach(6);
                           } else {
-                            if (odd > 8 || odd < 9) {
-                              cy.cashoutcalculation_premach(6);
+                            if (env.Codds_prematch > 8 || env.Codds_prematch < 9) {
+                              cy.cashoutcalculation_premach(7);
                             } else {
-                              if (odd > 9 || odd < 10) {
-                                cy.cashoutcalculation_premach(7);
+                              if (env.Codds_prematch > 9 || env.Codds_prematch < 10) {
+                                cy.cashoutcalculation_premach(8);
                               } else {
-                                if (odd > 10 || odd < 11) {
-                                  cy.cashoutcalculation_premach(8);
+                                if (env.Codds_prematch > 10 || env.Codds_prematch < 11) {
+                                  cy.cashoutcalculation_premach(9);
                                 } else {
-                                  if (odd > 11 || odd < 12) {
-                                    cy.cashoutcalculation_premach(9);
+                                  if (env.Codds_prematch > 11 || env.Codds_prematch < 12) {
+                                    cy.cashoutcalculation_premach(10);
                                   } else {
-                                    if (odd > 12 || odd < 1000) {
-                                      cy.cashoutcalculation_premach(10);
+                                    if (env.Codds_prematch > 12 || env.Codds_prematch < 1000) {
+                                      cy.cashoutcalculation_premach(11);
                                     } else {
                                     }
                                   }
