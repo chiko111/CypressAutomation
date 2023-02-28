@@ -346,4 +346,30 @@ context('Create New Market Template', () => {
     });
   });
 });
+context('Outcome Template', () => {
+  context('Create New Outcome Template', () => {
+    it('Create', () => {
+      cy.step('Navigate to Mapping tool')
+      cy.step('Click Outcome Templates')
+      cy.step('Click Create new outcome template')
+      cy.step('Type Outcome template name')
+      cy.step('Click Create')
+      
+    })
+    it('Check created outcome template', () => {
+      cy.step('Navigate to Mapping tool')
+      cy.step('Click Outcome Templates')
+      cy.step('Type Outcome template name (from previous test)')
+      cy.step('Click Search')
+      cy.step('Outcome template name is exist')
+      
+    })
+    it('Search', () => {
+      cy.step('Navigate to Mapping tool')
+      cy.step('Click Outcome Templates')
+      cy.step('Type Outcome template name')
+      cy.step('System display all markets with typed name')
+    })
+  })
+})
 });
