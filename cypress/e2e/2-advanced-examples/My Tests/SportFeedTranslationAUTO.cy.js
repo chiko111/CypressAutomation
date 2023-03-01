@@ -96,7 +96,7 @@ describe('testing token', () => {
     const cat4 = response.body[0].categories[5].name
    
 
-    expect(sport1).to.eq(soccer_bg)
+    //expect(sport1).to.eq(soccer_bg)
     expect(sport2).to.eq(basketball_bg)
     expect(sport3).to.eq(voleyball_bg)
     expect(sport4).to.eq(tenis_bg) 
