@@ -7,8 +7,7 @@ describe("Websocket test", () => {
   before(() => {
     cy.tokenplayer("testchiko1", "123456");
     cy.tokenadmin();
-    
-    
+
     //cy.withdraw("10")
   });
 
@@ -96,49 +95,36 @@ ${specialSymbol}`;
           WebSocketClient.send(subscribeMessage5);
           WebSocketClient.send(subscribeMessage6);
           WebSocketClient.send(subscribeMessage7);
-
-
-          let timerId = 0; 
-
-function keepAlive(timeout = 20000) { 
-    if (webSocketClient.readyState == webSocketClient.OPEN) {  
-        webSocket.send('1');  
-    }  
-    timerId = setTimeout(keepAlive, timeout);  
-}
-
-function cancelKeepAlive() {  
-    if (timerId) {  
-        clearTimeout(timerId);  
-    }  
-}
-
-          // WebSocketClient.addEventListener("message", event => {
-          //   const message = event.data;
-          //   if (message.startsWith('')) {
-              
-            
-          //   WebSocketClient.send("\0x9");
-          //   }
-           
-          // });
-          // Open the WebSocket connection
-
-          // Listen for incoming messages on the subscribed topic
           
-        }
-        setTimeout(()=>{cy.placebetprematch("1", "100")}, 500);
-        
-        WebSocketClient.addEventListener("message", event => {
-          const messageM = event.data;
-          if (messageM.startsWith("MESSAGE")) {
-            cy.log("New", event.data);
-            
+
+          let timerId = 0;
+
+          function keepAlive(timeout = 20000) {
+            if (webSocketClient.readyState == webSocketClient.OPEN) {
+              webSocket.send("1");
+            }
+            timerId = setTimeout(keepAlive, timeout);
           }
-          ;
+
+          function cancelKeepAlive() {
+            if (timerId) {
+              clearTimeout(timerId);
+            }
+          }
+        }
+        cy.placebetprematch("1", "100");
+   
+        if (message.startsWith('MESSAGE')) {
+          cy.log("New", event.data);
+        }
+    });
+    
         
       });
-    });
+    })
+
+    
+      
+
   });
-});
-})
+

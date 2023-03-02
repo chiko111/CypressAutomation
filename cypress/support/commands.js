@@ -41,11 +41,19 @@ Cypress.Commands.add('loginplayer', (user, password) => {
 Cypress.Commands.add('tokenplayer', (user, password) => {
   const env = Cypress.env() 
   cy.request({
+    method: 'GET',
+    url: "https://apigw-staging.efbet.tech/api/v1/content/public/termsAndCondition?language=bg",
+  }).then((resp) => {
+    env.ver= resp.body.version;
+    Cypress.env(env)
+  })
+  cy.request({
     method: 'POST',
     url: env.auth_url,
     body: {
-      "username": user,
-      "password": password
+      "password": password,
+      "termsAndConditionsVersion": env.ver,
+      "username": user
     }
   }).then((resp) => {
     env.tokenplayer = resp.body.access_token;

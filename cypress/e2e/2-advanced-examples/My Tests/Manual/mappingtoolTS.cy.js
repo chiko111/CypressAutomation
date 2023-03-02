@@ -4,8 +4,6 @@ describe("Mapping Tool - test suite", () => {
   context("Market Templates", () => {
     context("Delete", () => {
       it("Specifier", () => {
-        cy.step("Navigate");
-        cy.step("Market Templates");
         cy.step("Select Drop-down - StarCraft(ID:26)");
         cy.step("Select TestOne");
         cy.step("Click Edit Mapping");
@@ -13,8 +11,6 @@ describe("Mapping Tool - test suite", () => {
         cy.step("Click Save Mapping");
       });
       it("Outcome", () => {
-        cy.step("Navigate");
-        cy.step("Market Templates");
         cy.step("Select Drop-down - StarCraft(ID:26)");
         cy.step("Select TestOne");
         cy.step("Click Edit Mapping");
@@ -22,8 +18,6 @@ describe("Mapping Tool - test suite", () => {
         cy.step("Click Save Mapping");
       });
       it("Mapping", () => {
-        cy.step("Navigate");
-        cy.step("Market Templates");
         cy.step("Select Drop-down - StarCraft(ID:26)");
         cy.step("Select TestOne");
         cy.step("Click Edit Mapping");
@@ -33,8 +27,6 @@ describe("Mapping Tool - test suite", () => {
     });
     context("Add", () => {
       it("Specifier", () => {
-        cy.step("Navigate");
-        cy.step("Market Templates");
         cy.step("Select Drop-down - StarCraft(ID:26)");
         cy.step("Select TestOne");
         cy.step("Click Edit Mapping");
@@ -43,8 +35,6 @@ describe("Mapping Tool - test suite", () => {
         cy.step("Click Save Mapping");
       });
       it("Outcome", () => {
-        cy.step("Navigate");
-        cy.step("Market Templates");
         cy.step("Select Drop-down - StarCraft(ID:26)");
         cy.step("Select TestOne");
         cy.step("Click Edit Mapping");
@@ -56,8 +46,6 @@ describe("Mapping Tool - test suite", () => {
       });
       context("Update", () => {
         it("Change Market Type", () => {
-          cy.step("Navigate");
-          cy.step("Market Templates");
           cy.step("Select Drop-down - StarCraft(ID:26)");
           cy.step("Select TestOne");
           cy.step("Click Edit Mapping");
@@ -65,8 +53,6 @@ describe("Mapping Tool - test suite", () => {
           cy.step("Click Save Mapping");
         });
         it("Change Sport", () => {
-          cy.step("Navigate");
-          cy.step("Market Templates");
           cy.step("Select Drop-down - StarCraft(ID:26)");
           cy.step("Select TestOne");
           cy.step("Click Edit Mapping");
@@ -74,8 +60,6 @@ describe("Mapping Tool - test suite", () => {
           cy.step("Click Save Mapping");
         });
         it("Change Group", () => {
-          cy.step("Navigate");
-          cy.step("Market Templates");
           cy.step("Select Drop-down - Soccer(ID:120)");
           cy.step("Select Match Winner");
           cy.step("Click Edit Mapping");
@@ -83,8 +67,6 @@ describe("Mapping Tool - test suite", () => {
           cy.step("Click Save Mapping");
         });
         it("Outcome Type", () => {
-          cy.step("Navigate");
-          cy.step("Market Templates");
           cy.step("Select Drop-down - Soccer(ID:120)");
           cy.step("Select Match Winner");
           cy.step("Click Edit Mapping");
