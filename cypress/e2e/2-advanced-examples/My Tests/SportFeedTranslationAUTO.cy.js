@@ -23,7 +23,25 @@ describe('testing token', () => {
   })
   it("Sport translate bg", () => {
     const env = Cypress.env();
-    const response_req = 
+    
+    cy.request({
+      url: 'https://apigw-staging.efbet.tech/api/v1/sport-event/public/sport?lang=bg&partial=true',
+      auth: {bearer: env.tokenplayer},
+      body:[{"id":120,"name":"Soccer","translatedNames":{"bg":soccer_bg}},{"id":8,"name":"Basketball","translatedNames":{"en":basketball_en,"bg":basketball_bg}},{"id":182,"name":"Voleyball","translatedNames":{"en":voleyball_en,"bg":voleyball_bg}},{"id":192,"name":"Tenis","translatedNames":{"en":tenis_en,"bg":tenis_bg}}]
+    }).then((response) => { 
+    
+      const response_req1 = response.body[0].name
+      const response_req2 = response.body[1].name
+      const response_req3 = response.body[2].name
+      const response_req4 = response.body[3].name
+      cy.log(response_req1)
+      cy.log(response_req2)
+      cy.log(response_req3)
+      cy.log(response_req4)
+
+    })
+  
+
     cy.request({
       method: 'PUT',
       url: 'https://apigw-staging.efbet.tech/api/v1/sport-event/admin/translate/sport',
@@ -35,6 +53,7 @@ describe('testing token', () => {
 
     })
   })
+  
   it("Category translate bg", () => {
     const env = Cypress.env();
     const response_req = 
