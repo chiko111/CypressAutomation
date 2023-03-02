@@ -31,10 +31,15 @@ describe('testing token', () => {
     }).then((response) => { 
     
       const response_req1 = response.body[0].name
+      const response_id1 = response.body[0].id
       const response_req2 = response.body[1].name
+      const response_id2 = response.body[1].id
       const response_req3 = response.body[2].name
+      const response_id3 = response.body[2].id
       const response_req4 = response.body[3].name
-      cy.log(response_req1)
+      const response_id4 = response.body[3].id
+      const symbol = ":"
+      cy.log("id" + symbol + response_id1, "name" + symbol + response_req1, "translatedNames" +symbol+{"en" : response_req1, "bg" : "Футбол"})
       cy.log(response_req2)
       cy.log(response_req3)
       cy.log(response_req4)
