@@ -37,6 +37,7 @@ ${specialSymbol}`;
       WebSocketClient.send(initialMessage);
 
       // Add event listener for the "connected" message
+      
       WebSocketClient.addEventListener("message", event => {
         const message = event.data;
         if (message.startsWith("CONNECTED")) {
@@ -95,28 +96,17 @@ ${specialSymbol}`;
           WebSocketClient.send(subscribeMessage5);
           WebSocketClient.send(subscribeMessage6);
           WebSocketClient.send(subscribeMessage7);
-          
-
-          let timerId = 0;
-
-          function keepAlive(timeout = 20000) {
-            if (webSocketClient.readyState == webSocketClient.OPEN) {
-              webSocket.send("1");
-            }
-            timerId = setTimeout(keepAlive, timeout);
-          }
-
-          function cancelKeepAlive() {
-            if (timerId) {
-              clearTimeout(timerId);
-            }
-          }
+            
         }
+        
         cy.placebetprematch("1", "100");
-   
-        if (message.startsWith('MESSAGE')) {
-          cy.log("New", event.data);
+        cy.on('MESSAGE', (event) => {
+        if (eve.startsWith("MESSAGE")) {
+          const list = event.data
+          cy.log("New", list);
         }
+        cy.log("New", list);
+      })
     });
     
         
