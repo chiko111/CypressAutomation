@@ -2,6 +2,7 @@ const env = Cypress.env();
 //import WebSocket from 'ws';
 
 var WebSocketClient = require("websocket").client;
+let messages = []
 
 describe("Websocket test", () => {
   before(() => {
@@ -12,6 +13,7 @@ describe("Websocket test", () => {
   });
 
   it("test", () => {
+    const env = Cypress.env();
     //cy.loginplayer('testchiko', '123456')
 
     // Define the WebSocket endpoint to connect to
@@ -25,6 +27,8 @@ describe("Websocket test", () => {
 
     // Listen for the 'open' event to know when the connection is established
     WebSocketClient.addEventListener("open", () => {
+      
+      
       // Send the initial message with headers and special symbol
 
       const initialMessage = `CONNECT
@@ -35,11 +39,12 @@ X-Authorization:Bearer ${env.tokenplayer}
 ${specialSymbol}`;
 
       WebSocketClient.send(initialMessage);
-
-      // Add event listener for the "connected" message
       
       WebSocketClient.addEventListener("message", event => {
         const message = event.data;
+        messages.forEach(message => {
+          cy.log(message)
+        });
         if (message.startsWith("CONNECTED")) {
           cy.log("Connected", event.data);
           // Subscribe to the specified topic
@@ -66,21 +71,21 @@ id:sub-3
 destination:/topic/private/betslip-settlement/playerId.${env.playerId}
 
 ${specialSymbol}`;
-          const subscribeMessage4 = `SUBSCRIBE
-id:sub-4
-destination:/topic/private/betslip/cashout/systemBetTypeConfig
+//           const subscribeMessage4 = `SUBSCRIBE
+// id:sub-4
+// destination:/topic/private/betslip/cashout/systemBetTypeConfig
 
-${specialSymbol}`;
-          const subscribeMessage5 = `SUBSCRIBE
-id:sub-5
-destination:/topic/public/sportevent/cashout
+// ${specialSymbol}`;
+//           const subscribeMessage5 = `SUBSCRIBE
+// id:sub-5
+// destination:/topic/public/sportevent/cashout
 
-${specialSymbol}`;
-          const subscribeMessage6 = `SUBSCRIBE
-id:sub-6
-destination:/topic/private/sportevent/cashout/config
+// ${specialSymbol}`;
+//           const subscribeMessage6 = `SUBSCRIBE
+// id:sub-6
+// destination:/topic/private/sportevent/cashout/config
 
-${specialSymbol}`;
+// ${specialSymbol}`;
 
           const subscribeMessage7 = `SUBSCRIBE
 id:sub-7
@@ -92,29 +97,30 @@ ${specialSymbol}`;
           WebSocketClient.send(subscribeMessage1);
           WebSocketClient.send(subscribeMessage2);
           WebSocketClient.send(subscribeMessage3);
-          WebSocketClient.send(subscribeMessage4);
-          WebSocketClient.send(subscribeMessage5);
-          WebSocketClient.send(subscribeMessage6);
+          // WebSocketClient.send(subscribeMessage4);
+          // WebSocketClient.send(subscribeMessage5);
+          // WebSocketClient.send(subscribeMessage6);
           WebSocketClient.send(subscribeMessage7);
-            
+          cy.placebetprematch("1", "10")
+          messages.forEach(message => {
+            cy.log(message);
+          })
         }
+        else{
+          messages.push(message)
+        }
+
         
-        cy.placebetprematch("1", "100");
-        cy.on('MESSAGE', (event) => {
-        if (eve.startsWith("MESSAGE")) {
-          const list = event.data
-          cy.log("New", list);
-        }
-        cy.log("New", list);
-      })
-    });
-    
+        
+
+        // WebSocketClient.addEventListener("messages", event => {
+        messages.forEach(message => {
+          cy.log(message);
+        }) 
+        
         
       });
-    })
-
-    
       
-
+    });
   });
-
+});

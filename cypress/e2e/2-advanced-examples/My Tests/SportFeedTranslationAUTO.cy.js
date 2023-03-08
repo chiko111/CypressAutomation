@@ -27,38 +27,73 @@ describe('testing token', () => {
     cy.request({
       url: 'https://apigw-staging.efbet.tech/api/v1/sport-event/public/sport?lang=bg&partial=true',
       auth: {bearer: env.tokenplayer},
-      body:[{"id":120,"name":"Soccer","translatedNames":{"bg":soccer_bg}},{"id":8,"name":"Basketball","translatedNames":{"en":basketball_en,"bg":basketball_bg}},{"id":182,"name":"Voleyball","translatedNames":{"en":voleyball_en,"bg":voleyball_bg}},{"id":192,"name":"Tenis","translatedNames":{"en":tenis_en,"bg":tenis_bg}}]
+     
     }).then((response) => { 
     
-      const response_req1 = response.body[0].name
-      const response_id1 = response.body[0].id
-      const response_req2 = response.body[1].name
-      const response_id2 = response.body[1].id
-      const response_req3 = response.body[2].name
-      const response_id3 = response.body[2].id
-      const response_req4 = response.body[3].name
-      const response_id4 = response.body[3].id
-      const symbol = ":"
-      cy.log("id" + symbol + response_id1, "name" + symbol + response_req1, "translatedNames" +symbol+{"en" : response_req1, "bg" : "Футбол"})
-      cy.log(response_req2)
-      cy.log(response_req3)
-      cy.log(response_req4)
+      env.response_req1 = response.body[0].name
+      env.response_id1 = response.body[0].id
+      env.response_req2 = response.body[1].name
+      env.response_id2 = response.body[1].id
+      env.response_req3 = response.body[2].name
+      env.response_id3 = response.body[2].id
+      env.response_req4 = response.body[3].name
+      env.response_id4 = response.body[3].id
 
-    })
+      Cypress.env(env)
+      
+      cy.wrap({
+        id: env.response_id1,
+        name: env.response_req1,
+        translatedNames: {
+          en: env.response_req1,
+          bg: 'Футбол'
+        },
+        id: env.response_id2,
+        name: env.response_req2,
+        translatedNames: {
+          bg: env.response_req2
+        },
+        id: env.response_id3,
+        name: env.response_req3,
+        translatedNames: {
+          bg: env.response_req3
+        },
+        id: env.response_id4,
+        name: env.response_req4,
+        translatedNames: {
+          bg: env.response_req4
+        },
+      }).then((payload) => {
+       const pay = payload
+      
+     
+      
+      
+      
+      
+      
+      // cy.log("id" + symbol + response_id1, "name" + symbol + response_req1, "translatedNames" +symbol+JSON.stringify({"en" : response_req1, "bg" : "Футбол"}))
+      // cy.log("id" + symbol + response_id2, "name" + symbol + response_req2, "translatedNames" +symbol+JSON.stringify({"bg" : response_req2}))
+      // cy.log("id" + symbol + response_id3, "name" + symbol + response_req3, "translatedNames" +symbol+JSON.stringify({"bg" : response_req3}))
+      // cy.log("id" + symbol + response_id4, "name" + symbol + response_req4, "translatedNames" +symbol+JSON.stringify({"bg" : response_req4}))
+      
+
+    
   
 
     cy.request({
       method: 'PUT',
       url: 'https://apigw-staging.efbet.tech/api/v1/sport-event/admin/translate/sport',
       auth: {bearer: env.tokenadmin},
-      body:[{"id":120,"name":"Soccer","translatedNames":{"bg":soccer_bg}},{"id":8,"name":"Basketball","translatedNames":{"en":basketball_en,"bg":basketball_bg}},{"id":182,"name":"Voleyball","translatedNames":{"en":voleyball_en,"bg":voleyball_bg}},{"id":192,"name":"Tenis","translatedNames":{"en":tenis_en,"bg":tenis_bg}}]
+      body:[pay]
     }).then((response) => { 
     
     
 
     })
   })
-  
+})
+  })
   it("Category translate bg", () => {
     const env = Cypress.env();
     const response_req = 
@@ -120,10 +155,10 @@ describe('testing token', () => {
     const cat4 = response.body[0].categories[5].name
    
 
-    //expect(sport1).to.eq(soccer_bg)
-    expect(sport2).to.eq(basketball_bg)
-    expect(sport3).to.eq(voleyball_bg)
-    expect(sport4).to.eq(tenis_bg) 
+    expect(sport1).to.eq(env.response_req1)
+    expect(sport2).to.eq(env.response_req2)
+    expect(sport3).to.eq(env.response_req3)
+    expect(sport4).to.eq(env.response_req4) 
 
     expect(cat1).to.eq(catbg_bg)
     expect(cat2).to.eq(catsc_bg)
@@ -138,7 +173,7 @@ describe('testing token', () => {
 
 })
 
-  
+
       
 
 //[{"id":1215,"name":"Denmark","translatedNames":{"en":"Denmark","bg":"Дания"}},{"id":1251,"name":"Bulgaria","translatedNames":{"en":"Bulgaria"}}]
