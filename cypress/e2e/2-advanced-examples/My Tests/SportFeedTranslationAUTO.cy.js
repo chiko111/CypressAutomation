@@ -146,7 +146,7 @@ describe('testing token', () => {
     }).then((response) => {
       env.evtresponse_req1 = response.body[0].name
       env.evtresponse_id1 = response.body[0].id
-     },
+    }),
      cy.wrap({
       id: env.evtresponse_id1,
       name: env.evtresponse_req1,
