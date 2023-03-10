@@ -3,6 +3,8 @@ describe("testing token", () => {
     cy.tokenadmin();
     cy.tokenplayer("testchiko", "123456");
   });
+context('Functional testing', () => {
+
   it("Sport translate bg", () => {
     const env = Cypress.env();
     cy
@@ -154,7 +156,7 @@ describe("testing token", () => {
     const env = Cypress.env();
     cy
       .request({
-        url: `https://apigw-staging.efbet.tech/api/v1/sport-event/public/sport-event?lang=bg&tournamentId=${trresponse_id1}`,
+        url: `https://apigw-staging.efbet.tech/api/v1/sport-event/public/sport-event?lang=bg&tournamentId=${env.trresponse_id1}`,
         auth: { bearer: env.tokenplayer }
       })
       .then(response => {
@@ -170,12 +172,13 @@ describe("testing token", () => {
       })
       .then(payload3 => {
         const pay3 = payload3;
-      }), cy.request({
+       cy.request({
       method: "PUT",
       url:
         "https://apigw-staging.efbet.tech/api/v1/sport-event/admin/translate/sport-event",
       auth: { bearer: env.tokenadmin },
       body: [pay3]
+       })
     });
   });
   it("Sport, category, tournament, sport event check bg translation", () => {
@@ -218,4 +221,5 @@ describe("testing token", () => {
         cy.log(sport1 + sport2 + sport3 + sport4);
       });
   });
+});
 });
