@@ -102,9 +102,7 @@ ${specialSymbol}`;
           // WebSocketClient.send(subscribeMessage6);
           WebSocketClient.send(subscribeMessage7);
           cy.placebetprematch("1", "10")
-          messages.forEach(message => {
-            cy.log(message);
-          })
+          while(message.startsWith('MESSAGE'))
         }
         else{
           messages.push(message)
@@ -114,9 +112,7 @@ ${specialSymbol}`;
         
 
         // WebSocketClient.addEventListener("messages", event => {
-        messages.forEach(message => {
-          cy.log(message);
-        }) 
+          
         
         
       });
