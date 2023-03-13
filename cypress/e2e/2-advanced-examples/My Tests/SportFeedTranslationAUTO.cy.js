@@ -156,28 +156,39 @@ context('Functional testing', () => {
     const env = Cypress.env();
     cy
       .request({
+        url: `https://apigw-staging.efbet.tech/api/v1/sport-event/public/sport-event?lang=en&tournamentId=${env.trresponse_id1}`,
+        auth: { bearer: env.tokenplayer }
+      })
+      .then(response => {
+        env.evtresponse_reqen = response.body[0].name;
+        Cypress.env(env);
+        
+        
+      })
+    cy
+      .request({
         url: `https://apigw-staging.efbet.tech/api/v1/sport-event/public/sport-event?lang=bg&tournamentId=${env.trresponse_id1}`,
         auth: { bearer: env.tokenplayer }
       })
       .then(response => {
         env.evtresponse_req1 = response.body[0].name;
         env.evtresponse_id1 = response.body[0].id;
+        Cypress.env(env);
+        cy.log(env.evtresponse_req1)
+        cy.log(env.evtresponse_id1)
+        cy.log(env.evtresponse_reqen)
       }), cy
-      .wrap({
-        id: env.evtresponse_id1,
-        name: env.evtresponse_req1,
-        translatedNames: {
-          bg: env.evtresponse_req1
-        }
-      })
-      .then(payload3 => {
-        const pay3 = payload3;
+      .wrap({"id":env.evtresponse_id1,"name":env.evtresponse_reqen,"translatedNames":{"bg":env.evtresponse_req1}})
+      .then(payloadtr => {
+        const paytr = payloadtr;
+        cy.log(JSON.stringify(paytr))
+        
        cy.request({
       method: "PUT",
       url:
         "https://apigw-staging.efbet.tech/api/v1/sport-event/admin/translate/sport-event",
       auth: { bearer: env.tokenadmin },
-      body: [pay3]
+      body: [{"id":env.evtresponse_id1,"name":env.evtresponse_reqen,"translatedNames":{"bg":env.evtresponse_req1}}]
        })
     });
   });

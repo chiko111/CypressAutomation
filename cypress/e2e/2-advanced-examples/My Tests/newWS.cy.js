@@ -46,7 +46,7 @@ ${specialSymbol}`;
           cy.log(message)
         });
         if (message.startsWith("CONNECTED")) {
-          cy.log("Connected", event.data);
+          //cy.log("Connected", event.data);
           // Subscribe to the specified topic
           const subscribeMessage = `SUBSCRIBE
 id:sub-0
@@ -102,14 +102,22 @@ ${specialSymbol}`;
           // WebSocketClient.send(subscribeMessage6);
           WebSocketClient.send(subscribeMessage7);
           cy.placebetprematch("1", "10")
-          while(message.startsWith('MESSAGE'))
+          WebSocketClient.addEventListener("message", event => {
+          
+          });
+
+
+
+
         }
         else{
           messages.push(message)
         }
 
         
-        
+        messages.filter(msg => msg !== '').forEach(msg => {
+          cy.log(msg);
+        });
 
         // WebSocketClient.addEventListener("messages", event => {
           
