@@ -43,7 +43,7 @@ ${specialSymbol}`;
       WebSocketClient.addEventListener("message", event => {
         const message = event.data;
         messages.forEach(message => {
-          cy.log(message)
+          cy.log("",message)
         });
         if (message.startsWith("CONNECTED")) {
           //cy.log("Connected", event.data);
@@ -103,7 +103,15 @@ ${specialSymbol}`;
           WebSocketClient.send(subscribeMessage7);
           cy.placebetprematch("1", "10")
           WebSocketClient.addEventListener("message", event => {
-          
+            const message = event.data
+            if (typeof message !== '' && typeof messages.onmessage === 'function') {
+              message.onmessage(msg => {
+                if (msg !== '') {
+                  cy.log(msg);
+                  cy.log("00000");
+                }
+              });
+            }
           });
 
 
@@ -117,6 +125,7 @@ ${specialSymbol}`;
         
         messages.filter(msg => msg !== '').forEach(msg => {
           cy.log(msg);
+          cy.log("00000")
         });
 
         // WebSocketClient.addEventListener("messages", event => {
